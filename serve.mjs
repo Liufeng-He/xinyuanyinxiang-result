@@ -7,4 +7,7 @@ const server=http.createServer((req,res)=>{
   if(file.startsWith(path.resolve('assets')+path.sep)&&fs.existsSync(file)){res.writeHead(200,{'Content-Type':file.endsWith('.webp')?'image/webp':'application/octet-stream'});fs.createReadStream(file).pipe(res);return;}
   res.writeHead(404);res.end('Not found');
 });
-server.listen(4173,'127.0.0.1',()=>console.log('Local: http://127.0.0.1:4173'));
+const PORT = process.env.PORT || 4173; // 优先使用环境变量 PORT
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
+});
